@@ -50,7 +50,7 @@ logger.info("Osob initialized!" )
 
 #TODO: implement log file
 def futureSchedule(msg):
-	content_type, chat_type, chat_id = telepot.glance2(msg)
+	content_type, chat_type, chat_id = telepot.glance(msg)
 	f = io.StringIO()
 	sched.print_jobs(out=f)
 	f.seek(0)
@@ -384,7 +384,7 @@ if __name__ == '__main__':
 	bot = telepot.Bot(TOKEN)
 
 	# Attach a function to notifyOnMessage call back
-	bot.notifyOnMessage(handle)
+	bot.message_loop(handle)
 
 	sched = BackgroundScheduler()
 
