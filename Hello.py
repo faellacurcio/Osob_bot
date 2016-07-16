@@ -358,9 +358,13 @@ def handle(msg):
 
 		elif '/id' in command:
 			logger.info(userName+" used "+command )
+			try:
+				Nick = msg['from']['username']
+			except:
+				Nick = "ERROR: No username"
 			bot.sendMessage(chat_id, 				\
 				"From: "+userName+				\
-				"\nUsername: @"+msg['from']['username']+	\
+				"\nUsername: @"+Nick+	\
 				"\nChat ID: "+str(msg['chat']['id'])+		\
 				"\nChat status: "+chat_type)
 
@@ -405,5 +409,4 @@ if __name__ == '__main__':
 	except (KeyboardInterrupt, SystemExit):
 		# Not strictly necessary if daemonic mode is enabled but should be done if possible
 		sched.shutdown()
-
 
