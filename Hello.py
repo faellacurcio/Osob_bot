@@ -302,8 +302,24 @@ def handle(msg):
 
 		elif '/eyes' in command:
 		#elif '/4791949435' in command:
-			logger.info(userName+" used "+command )
-			osobEyes(chat_id)
+			try:
+				with open("authorizedUsers.txt") as f:
+					authorizedChat = f.read().split("\n")
+					if (str(chat_id) in authorizedChat):
+						logger.info(userName+" used "+command )
+						osobEyes(chat_id)
+					else:
+						bot.sendMessage(chat_id, "User not authorized!! Reporting to administrator")
+						try:
+							with open("administrator.txt")  as f:
+								administrator = f.read().split("\n")
+								bot.sendMessage(administrator[0], "Unauthorized User '"+userName+"' chatID: "+str(chat_id)+" tried to access /eyes")
+								print(administrator)
+						except:
+							print("Error finding administrator.txt data.")
+			except:	
+				print("Can't open the specified file!")
+
 
 		elif '/fday' in command:
 			logger.info(userName+" used "+command )
