@@ -193,9 +193,15 @@ def osobEyes(chat_id):
 def handle(msg):
 
 	#print(msg)
-	userName = msg['from']['first_name']+" "+msg['from']['last_name']
+	try:
+		userName = msg['from']['first_name']+" "+msg['from']['last_name']
+	except:
+		try:
+			userName = msg['from']['first_name']+" LastNameUnkown"
+		except:
+			userName = "FirstNameUnknown LastNameUnkown"
 
-	content_type, chat_type, chat_id = telepot.glance2(msg)
+	content_type, chat_type, chat_id = telepot.glance(msg)
 
 	#print (content_type)
 	#print ("---")
